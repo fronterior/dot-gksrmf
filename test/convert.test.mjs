@@ -48,8 +48,14 @@ test('공백 없는 작은따옴표는 원문 유지, 공백이 있으면 인용
 })
 
 test('코드블록 펜스 내부는 원문 유지', () => {
-  const input = ['zhemqmffhr', ',,,', 'const a = 0;', ',,,', 'dlek'].join('\n')
-  const expected = ['코드블록', ',,,', 'const a = 0;', ',,,', '이다'].join('\n')
+  const input = ['zhemqmffhr', '|||', 'const a = 0;', '|||', 'dlek'].join('\n')
+  const expected = ['코드블록', '|||', 'const a = 0;', '|||', '이다'].join('\n')
+  assert.equal(conv(input), expected)
+})
+
+test('쉼표가 든 데이터를 넣어도 펜스가 조기 종료되지 않음', () => {
+  const input = ['zhem', '|||', 'a,b,c,d', ',,,', '1,2,3,4', '|||', 'gksrmf'].join('\n')
+  const expected = ['코드', '|||', 'a,b,c,d', ',,,', '1,2,3,4', '|||', '한글'].join('\n')
   assert.equal(conv(input), expected)
 })
 

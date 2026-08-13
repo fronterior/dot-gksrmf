@@ -59,6 +59,24 @@ test('쉼표가 든 데이터를 넣어도 펜스가 조기 종료되지 않음'
   assert.equal(conv(input), expected)
 })
 
+test('펜스 뒤에 문자가 붙어도 구분자로 인식', () => {
+  const input = ['zhem', '|||js', 'const a = 0;', '|||', 'gksrmf'].join('\n')
+  const expected = ['코드', '|||js', 'const a = 0;', '|||', '한글'].join('\n')
+  assert.equal(conv(input), expected)
+})
+
+test('닫는 펜스 뒤에 문자가 붙어도 인식하며 펜스 줄은 원문 유지', () => {
+  const input = ['zhem', '||| python', 'x = 1', '||| end', 'gksrmf'].join('\n')
+  const expected = ['코드', '||| python', 'x = 1', '||| end', '한글'].join('\n')
+  assert.equal(conv(input), expected)
+})
+
+test('펜스 내부의 영타는 변환되지 않고 바깥만 변환', () => {
+  const input = ['|||ts', 'const gksrmf = 1', '|||', 'gksrmf'].join('\n')
+  const expected = ['|||ts', 'const gksrmf = 1', '|||', '한글'].join('\n')
+  assert.equal(conv(input), expected)
+})
+
 test('URL·경로·플래그·파일명 토큰 보존', () => {
   assert.equal(conv('https://github.com/foo rhkswjd'), 'https://github.com/foo 관정')
   assert.equal(conv('src/index.ts vkdlf'), 'src/index.ts 파일')

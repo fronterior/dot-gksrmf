@@ -17,12 +17,42 @@
 
 ## 설치
 
+Claude Code 에서 마켓플레이스를 등록한 뒤 플러그인을 설치합니다.
+
 ```
 /plugin marketplace add fronterior/dot-gksrmf
 /plugin install dot-gksrmf@fronterior
 ```
 
+설치 요약에 `Run /reload-plugins to activate.` 가 뜨면 `/reload-plugins` 를 실행해야 현재 세션에 적용됩니다. `Plugin is now active.` 면 바로 쓸 수 있습니다.
+
+터미널에서 셸 명령으로 설치할 수도 있습니다. 이 경우 다음 실행 때 로드됩니다.
+
+```bash
+claude plugin marketplace add fronterior/dot-gksrmf
+claude plugin install dot-gksrmf@fronterior
+```
+
+설치되면 점을 붙여 아무 문장이나 쳐서 확인합니다.
+
+```
+.dkssudgktpdy
+   -> 안녕하세요
+```
+
 의존성은 없습니다. Node.js 16 이상에서 동작합니다.
+
+### 업데이트
+
+```
+/plugin marketplace update fronterior
+```
+
+### 제거
+
+```
+/plugin uninstall dot-gksrmf@fronterior
+```
 
 ## 변환 규칙
 

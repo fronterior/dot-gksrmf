@@ -41,10 +41,12 @@ test('백틱 인라인은 원문 유지', () => {
   assert.equal(conv('zhemsms `const a = 0` dlek'), '코드는 `const a = 0` 이다')
 })
 
-test('공백 없는 작은따옴표는 원문 유지, 공백이 있으면 인용문으로 보고 변환', () => {
+test('작은따옴표 안은 공백이 있어도 원문 유지', () => {
   assert.equal(conv("'js'rkxdms"), "'js'같은")
   assert.equal(conv("'dlfjrp' gks"), "'dlfjrp' 한")
-  assert.equal(conv("'dlfjgrp gks'"), "'이렇게 한'")
+  assert.equal(conv("'two words' dlfjgrpTmaus"), "'two words' 이렇게쓰면")
+  assert.equal(conv("'const a = 0' dlek"), "'const a = 0' 이다")
+  assert.equal(conv("'a' rhk 'b c' ekd"), "'a' 과 'b c' 당")
 })
 
 test('코드블록 펜스 내부는 원문 유지', () => {

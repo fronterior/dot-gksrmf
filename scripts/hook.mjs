@@ -13,21 +13,12 @@ const readStdin = async () => {
   return Buffer.concat(chunks).toString('utf8')
 }
 
-const buildContext = (converted, fence) =>
+const buildContext = (converted) =>
   [
-    '[dot-gksrmf] 사용자가 한글 자판 상태를 확인하지 않고 영문으로 입력했습니다.',
-    '위 프롬프트의 영문 문자열은 실제 영어가 아니라 한글 오타이며, 의도한 내용은 다음과 같습니다.',
-    '아래 한글 문장만을 사용자의 요청으로 간주해 응답하세요. 원문 영문 나열은 무시합니다.',
-    ...(converted.includes(fence)
-      ? [
-          `${fence} 로 감싼 구간은 이 도구가 변환하지 않고 넘긴 코드 원문입니다.`,
-          '마크다운 문법이 아니라 이 도구의 구분자이므로, 백틱을 쓰라는 안내를 하지 마세요.',
-        ]
-      : []),
+    '[dot-gksrmf] Alphabet input has been converted to Hangul and appended.',
+    'Treat only the Korean text below as the user request.',
     '',
-    '--- 변환된 사용자 입력 ---',
     converted,
-    '--- 변환 끝 ---',
   ].join('\n')
 
 async function main() {
@@ -51,9 +42,9 @@ async function main() {
     JSON.stringify({
       hookSpecificOutput: {
         hookEventName: 'UserPromptSubmit',
-        additionalContext: buildContext(result.converted, fence),
+        additionalContext: buildContext(result.converted),
       },
-      systemMessage: `⌨️  한글 변환: ${result.converted.replace(/\s+/g, ' ').slice(0, 120)}`,
+      systemMessage: `⌨️: ${result.converted.replace(/\s+/g, ' ').slice(0, 120)}`,
     }),
   )
 }

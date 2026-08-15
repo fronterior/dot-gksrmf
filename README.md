@@ -15,6 +15,8 @@
 
 점으로 시작하지 않는 프롬프트는 전혀 건드리지 않습니다.
 
+Claude 가 작업 중일 때 입력한 메시지는 `UserPromptSubmit` 을 거치지 않고 다음 툴 결과에 붙어 전달됩니다. 이 메시지는 `PostToolBatch` 훅이 툴 배치가 끝난 직후 transcript 에서 찾아 같은 방식으로 변환·주입합니다. 작업 중이든 아니든 점으로 시작하면 변환됩니다.
+
 ## 설치
 
 Claude Code 에서 마켓플레이스를 등록한 뒤 플러그인을 설치합니다.
@@ -120,7 +122,7 @@ const a = 0;
 ## 개발
 
 ```bash
-node --test test/convert.test.mjs
+node --test test/*.test.mjs
 ```
 
 테스트 러너(`node --test`)는 Node.js 18 이상이 필요합니다. 훅 실행 자체는 16 이상이면 됩니다.

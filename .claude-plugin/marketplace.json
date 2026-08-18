@@ -13,7 +13,7 @@
       "name": "dot-gksrmf",
       "source": "./",
       "description": "한/영 전환 없이 영문 자판으로 친 한글 요청을 변환하는 훅. 점(.)으로 시작하며, 작업 중 입력한 메시지도 변환",
-      "version": "0.3.2",
+      "version": "0.3.3",
       "author": {
         "name": "fronterior"
       },
